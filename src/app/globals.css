@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Palet sama dengan halaman ultah sebelumnya */
+@theme {
+  --color-blush: #ffdde1;
+  --color-plum: #642ca9;
+  --color-plum-dark: #4f2385;
+  --color-pink: #ffb3bd;
+  --color-butter: #ffd889;
+  --color-sky: #afcbff;
+  --color-lilac: #c8a2ff;
+  --color-paper: #fffaf6;
+}
+
+@theme inline {
+  --font-display: var(--font-bagel);
+  --font-body: var(--font-bricolage);
+  --font-hand: var(--font-nanum);
+}
+
+html,
+body {
+  background: var(--color-blush);
+  color: var(--color-plum);
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+}
+
+/* Tailwind v4 ga ngasih cursor pointer ke button by default */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-plum);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Api lilin */
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(-2deg);
+  }
+  25% {
+    transform: scale(0.92, 1.08) rotate(2deg);
+  }
+  50% {
+    transform: scale(1.05, 0.95) rotate(-1deg);
+  }
+  75% {
+    transform: scale(0.96, 1.05) rotate(1.5deg);
+  }
+}
+
+/* Polaroid goyang di tali */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(var(--tilt-a));
+  }
+  50% {
+    transform: rotate(var(--tilt-b));
+  }
+}
+
+.flame {
+  transform-origin: 50% 90%;
+  animation: flicker 0.9s ease-in-out infinite;
+}
+
+.sway {
+  transform-origin: 50% 0;
+  animation: sway var(--sway-dur, 5s) ease-in-out infinite;
+  animation-delay: var(--sway-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame,
+  .sway {
+    animation: none;
+  }
+}
