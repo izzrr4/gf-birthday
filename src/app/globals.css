@@ -78,6 +78,76 @@ body {
   animation-delay: var(--sway-delay, 0s);
 }
 
+/* ---------- Kertas scrapbook ---------- */
+
+/* ukuran lipatan sudut halaman; didaftarin biar bisa di-transition */
+@property --fold {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 44px;
+}
+
+/* halaman 1: kertas kotak-kotak */
+.paper-grid {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(rgb(200 162 255 / 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(200 162 255 / 0.22) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* halaman 2: kertas surat bergaris. --line = jarak garis = line-height tulisan,
+   --top = pita kosong di atas, --margin = garis pink di kiri */
+.paper-lined {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent calc(var(--margin) - 1px),
+      rgb(255 179 189 / 0.9) calc(var(--margin) - 1px),
+      rgb(255 179 189 / 0.9) calc(var(--margin) + 1px),
+      transparent calc(var(--margin) + 1px)
+    ),
+    linear-gradient(var(--color-paper), var(--color-paper)),
+    linear-gradient(transparent calc(var(--line) - 1px), rgb(175 203 255 / 0.75) calc(var(--line) - 1px));
+  background-size:
+    100% 100%,
+    100% var(--top),
+    100% var(--line);
+  background-position:
+    0 0,
+    0 0,
+    0 var(--top);
+  background-repeat: no-repeat, no-repeat, repeat-y;
+}
+
+/* punggung kertas halaman 1 (kelihatan pas dibalik di HP) */
+.paper-back {
+  background-color: #f7effb;
+}
+
+/* sisi lembar yang lagi membelakangi layar disembunyiin */
+.face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* sudut kertas yang dilipat: kertasnya dipotong, flap-nya ditempel di atas */
+.fold-right {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--fold)), calc(100% - var(--fold)) 100%, 0 100%);
+}
+.fold-left {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--fold) 100%, 0 calc(100% - var(--fold)));
+}
+.flap-right {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  background: linear-gradient(315deg, #dcc8f2 50%, #fffaf6 100%);
+}
+.flap-left {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  background: linear-gradient(45deg, #dcc8f2 50%, #fffaf6 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .flame,
   .sway {

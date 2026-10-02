@@ -121,7 +121,7 @@ export default function Gate({ children }: { children: React.ReactNode }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -40, transition: { duration: 0.35 } }}
           >
-            <h1 className="font-display text-5xl leading-none sm:text-6xl">Beneran lu ga ni?</h1>
+            <h1 className="font-display text-5xl leading-none sm:text-6xl">Beneran kmoeh ga nich?</h1>
             <p className="mt-4 text-lg">Coba tanggal ultah lu masukin sini</p>
 
             <motion.form
